@@ -5,10 +5,20 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+
+/**
+ * A basic client for interaction
+ * with the server. It passes two values
+ * for addition and displays the response.
+ * 
+ * @author Shahbaz.Alam
+ *
+ */
 public class AdditionClient {
 
 	public static void main(String[] args) {
-		System.out.println("---------Client--------");
+		System.out.println("---------Client Terminal--------");
+
 		String host = "localhost";
 		int port = 8080;
 		Socket clientSocket = null;
@@ -16,28 +26,26 @@ public class AdditionClient {
 		BufferedReader in = null;
 		InputStreamReader ir = null;
 		BufferedReader stdIn = null;
-		
+
 		try {
 			clientSocket = new Socket(host, port);
 			out = new PrintWriter(clientSocket.getOutputStream(), true);
 			ir = new InputStreamReader(clientSocket.getInputStream());
 			in = new BufferedReader(ir);
 			stdIn = new BufferedReader(new InputStreamReader(System.in));
-			
+
 			out.println("Add");
 			System.out.println("Enter the 1st Numnber:");
 			out.println(stdIn.readLine());
 			System.out.println("Enter the 2nd Numnber:");
 			out.println(stdIn.readLine());
-			
+
 			System.out.println("The Result from the server is--"+in.readLine());
 		} catch (UnknownHostException e) {
 			System.exit(1);
 		} catch(IOException e){
 			System.exit(1);
 		}
-		
-
 	}
 
 }
